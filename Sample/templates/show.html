@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+<style>
+   /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.responsive-table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-table th, .responsive-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.responsive-table th {
+    background-color: #6cc06e;
+    color: white;
+}
+
+.responsive-table td {
+    color: #333;
+}
+
+.responsive-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.update, .delete {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.update {
+    background-color: #4CAF50;
+}
+
+.update:hover {
+    background-color: #45a049;
+}
+
+.delete {
+    background-color: #f44336;
+}
+
+.delete:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    .responsive-table {
+        width: 100%;
+        border: 0;
+    }
+
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .responsive-table td {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        border-bottom: 1px dotted #ccc;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .responsive-table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+</style>
+</head>
+<body>
+    <h1 align="center">Details</h1>
+    <div class="table-container">
+   <table class="responsive-table">
+    {% block content %}
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Update</th>
+        <th>delete</th>
+    </tr>
+    {% for i in show %}
+    <tr>
+        
+        <td>{{ i.id }}</td>
+        <td>{{ i.Name }}</td>
+        <td>{{ i.Email }}</td>
+        <td>{{ i.Password }}</td>
+        <td><a href="{% url 'update' i.id %}" class="update">Update</a></td>
+        <td><a href="{% url 'delete' i.id %}" class="delete">delete</a></td>
+        
+    </tr>
+    {% endfor %}
+    {% endblock %}
+</table>
+</div>
+</body>
+</html>
